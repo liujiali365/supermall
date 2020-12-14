@@ -1,0 +1,64 @@
+@import "./normalize.css";
+
+
+/*:root 伪类 -> 获取根元素html*/
+:root {
+  /* 文字颜色 */
+  --color-text: #666;
+  /* 文字高亮颜色 */
+  --color-high-text: #ff5777;
+  /* 用于设置背景颜色 */
+  --color-tint: #ff8198;
+  --color-background: #fff;
+  --font-size: 14px;
+  --line-height: 1.5;
+  /* css 定义变量large-size，通过var(--large-size)使用 */
+  /* --large-size: 50px; */
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  /* 这样的盒子的内边距和边框不会撑大盒子，通过width相较于父亲的占比固定的盒子大小 */
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  user-select: none; /* 禁止用户鼠标在页面上选中文字/图片等 */
+  -webkit-tap-highlight-color: transparent; /* webkit是苹果浏览器引擎，tap点击，highlight背景高亮，color颜色，颜色用数值调节 */
+  background: var(--color-background);
+  color: var(--color-text);
+  /* rem vw/vh */
+  width: 100vw;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+
+.clear-fix::after {
+  clear: both;
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  /* visibility:hidden隐藏但占据空间，display:hidden隐藏且不占据空间 */
+  visibility: hidden;
+}
+
+.clear-fix {
+  zoom: 1;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
