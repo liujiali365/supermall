@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 export default {
   name: "TabControl",
   data() {
@@ -38,6 +38,7 @@ export default {
 <style scoped>
 .tab-control {
   display: flex;
+  width: 100%;
   text-align: center;
   font-size: 15px;
   height: 40px;

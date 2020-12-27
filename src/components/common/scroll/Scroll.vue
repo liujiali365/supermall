@@ -33,27 +33,39 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       // 这个属性设置为true时，div，span等元素也是可监听点击的
       click: true,
-      probeType: this.probeType,
-      pullUpLoad: this.pullUpLoad
+      probeType: this.probeType,    // 1，2，3代表监听滚动位置的不同 position
+      pullUpLoad: this.pullUpLoad   // true/false监听是否拉到底部，在BScroll中要有这个配置，才能有实例的监听
     })
 
     // 2. 监听滚动的位置
-    this.scroll.on('scroll', (position) => {
+    if(this.probeType === 2 || this.probeType ===3 ) {
+      this.scroll.on('scroll', (position) => {
       // console.log(position);
       this.$emit('scroll', position)
-    })
+      })
+    }
 
     // 3. 监听上拉事件
-    this.scroll.on('pullingUp', () => {
+    if(this.pullUpLoad) {
+      this.scroll.on('pullingUp', () => {
       this.$emit('pullingUp')
-    })
+      })
+    }
   },
   methods: {
     scrollTo(x, y, time) {
-      this.scroll.scrollTo(x, y, time)
+      // 防止还未渲染组件就要调用。与阻断
+      this.scroll && this.scroll.scrollTo(x, y, time)
     },
     finishPullUp() {
-      this.scroll.finishPullUp()
+      this.scroll && this.scroll.finishPullUp()
+    },
+    refresh(...args) {
+      this.scroll && this.scroll.refresh()
+      console.log(args);
+    },
+    getScrollY() {
+      return this.scroll.y ? this.scroll.y : 0;
     }
   }
 }
